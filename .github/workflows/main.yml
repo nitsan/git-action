@@ -1,9 +1,8 @@
 name: Bump version
 
 on:
-  push:
-    branches:
-      - main
+  pull_request_target:
+    types: [assigned, opened, synchronize, reopened]
 jobs:
   build:
     runs-on: ubuntu-latest
