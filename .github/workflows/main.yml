@@ -1,0 +1,24 @@
+name: Bump version
+
+on:
+  push:
+    branches:
+      - master
+      types: [before]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v1
+      - name: 'Get email'
+        run: |
+          echo GITHUB_EMAIL=$(git --no-pager show -s --format=\'%ae\') >> $GITHUB_ENV
+      - name: 'Get commit message'
+        run: |
+          echo GITHUB_COMMIT_MESSAGE=$(git log -1 --pretty=%B) >> $GITHUB_ENV
+      - name: 'Setup GIT'
+        run: |
+          echo "Setting email to: ${GITHUB_EMAIL}"
+          echo "Setting user to: ${GITHUB_ACTOR}"
+          echo "Commit message: $GITHUB_COMMIT_MESSAGE"
